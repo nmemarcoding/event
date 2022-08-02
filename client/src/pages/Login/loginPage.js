@@ -22,6 +22,7 @@ export default function LoginPage() {
             Axios.post("/api/auth/signin", credentials)
             .then((res) =>{
                 console.log(res.data)
+                sessionStorage.setItem('loggedIn', true);
                 navigate('/');
                 
             } ).catch((e)=>{
