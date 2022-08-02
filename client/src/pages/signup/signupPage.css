@@ -1,0 +1,10 @@
+.signupForm {
+    width: 400px;
+    margin-top: 15vh;
+}
+
+.signupPage {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
