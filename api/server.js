@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+const auth = require("./routes/auth.routes");
+const user = require("./routes/user.routes");
 const app = express();
 
 var corsOptions = {
@@ -18,6 +20,9 @@ app.use(
         httpOnly: true
     })
 );
+
+app.use("/api/auth", auth);
+app.use("/api/auth/test", user);
 
 const db = require("./models");
 const Role = db.role;
