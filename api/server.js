@@ -3,6 +3,7 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const auth = require("./routes/auth.routes");
 const user = require("./routes/user.routes");
+const event = require("./routes/event.routes");
 const app = express();
 
 var corsOptions = {
@@ -23,6 +24,7 @@ app.use(
 
 app.use("/api/auth", auth);
 app.use("/api/auth/test", user);
+app.use("/api/event", event);
 
 const db = require("./models");
 const Role = db.role;
