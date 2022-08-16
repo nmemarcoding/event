@@ -1,5 +1,6 @@
 const db = require("../models");
 const Event = db.event;
+const User = db.user;
 
 exports.create = (req, res) => {
     const event = new Event({
@@ -21,12 +22,14 @@ exports.create = (req, res) => {
 // add guest  add event (add event id to url body "guestsId": ["guestId"] )
 exports.addGuest = (req, res) => {
 
+
+
     Event.findById({ _id: req.params.id })
         .then(user => {
             if (user.guestsId.includes(req.body.guestsId) === true) {
                 res.send("this guest is alrery exist")
             } else {
-                Event.findByIdAndUpdate({ _id: req.params.id }, { $push: { guestsId: req.body.guestsId } })
+                Event.findByIdAndUpdate({ _id: req.params.id }, { $addToSet: { guestsId: req.body.guestsId } })
                     .then(() => {
                         res.send(req.body)
                     })
@@ -34,17 +37,30 @@ exports.addGuest = (req, res) => {
         })
 
 
+
+
 }
 
 //  remove guest from event (add event id to url and body "guestsId": ["guestId"])
 
 exports.deleteGuestById = (req, res) => {
-    Event.findByIdAndUpdate({ _id: req.params.id }, { $pullAll: { guestsId: req.body.guestsId } })
-        .then(() => {
-            res.send(`${req.body.guestsId} removed`)
+    Event.findByIdAndUpdate({ _id: req.params.id }, { $pullAll: { guestsId: [req.body.guestsId] } })
+        .then((h) => {
+            res.send(`${h} removed`)
         })
+        // Event.findByIdAndUpdate({ _id: req.params.id }
+
+    // ).then(user => {
+
+    //     const temp = user.guestsId.filter(data => { return data._id.toString() !== req.body.guestsId.toString() })
+
+    //     Event.findByIdAndUpdate({ _id: req.params.id }, { guestsId: [temp] }).then(user => {
+    //         res.send(user)
+    //     })
+    // })
 }
 
+// get all the events
 exports.getEvnts = (req, res) => {
     Event.find({}, function(err, result) {
         if (err) {
@@ -54,4 +70,28 @@ exports.getEvnts = (req, res) => {
         }
     })
 
+}
+
+// get event by id add id to url
+exports.getEvent = (req, res) => {
+    Event.find({ _id: req.params.id })
+        .then(data => { res.send(data) })
+}
+
+// get event by user id (id user id to url)
+
+exports.getEvetByGuestId = (req, res) => {
+    Event.find({ guestsId: [req.params.id] })
+        .then(user => { res.send(user) })
+}
+
+
+
+// delet event by event id "add id to url"
+
+exports.deletEvent = (req, res) => {
+    Event.deleteOne({ _id: req.params.id })
+        .then(() => {
+            res.send("delited")
+        })
 }

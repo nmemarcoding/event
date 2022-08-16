@@ -5,7 +5,7 @@ const Event = mongoose.model(
         hostId: String,
         title: String,
         date: String,
-        guestsId: [String]
+        guestsId: [Object]
 
     })
 );
