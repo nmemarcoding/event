@@ -14,7 +14,7 @@ exports.create = (req, res) => {
             res.status(500).send({ message: err });
             return;
         }
-        res.send({ message: "Event vreated successfully successfully!" });
+        res.send({ message: "Event created successfully successfully!" });
     });
 
 }
@@ -44,10 +44,10 @@ exports.addGuest = (req, res) => {
 //  remove guest from event (add event id to url and body "guestsId": ["guestId"])
 
 exports.deleteGuestById = (req, res) => {
-    Event.findByIdAndUpdate({ _id: req.params.id }, { $pullAll: { guestsId: [req.body.guestsId] } })
+    Event.findOneAndUpdate({ _id: req.params.id }, { $pullAll: { guestsId: [{ _id: req.body.guestsId }] } }, { new: true })
         .then((h) => {
             res.send(`${h} removed`)
-        })
+        }).catch(e => { res.send(e) })
         // Event.findByIdAndUpdate({ _id: req.params.id }
 
     // ).then(user => {
@@ -74,8 +74,11 @@ exports.getEvnts = (req, res) => {
 
 // get event by id add id to url
 exports.getEvent = (req, res) => {
-    Event.find({ _id: req.params.id })
+    let temp = ""
+    Event.find({ _id: req.params.id }).populate("guestsId", "email username")
         .then(data => { res.send(data) })
+
+
 }
 
 // get event by user id (id user id to url)
@@ -87,11 +90,12 @@ exports.getEvetByGuestId = (req, res) => {
 
 
 
+
 // delet event by event id "add id to url"
 
 exports.deletEvent = (req, res) => {
-    Event.deleteOne({ _id: req.params.id })
+    Event.deleteOne({ "_id": req.params.id })
         .then(() => {
-            res.send("delited")
+            res.send(`${req.params.id} delited`)
         })
 }
