@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
     const navigate = useNavigate()
-    const [loggedIn,setLoggedIn] = useState(false);
+    const [loggedIn,setLoggedIn] = useState(true);
     useEffect(() => {
-        if(sessionStorage.getItem('loggedIn') && (sessionStorage.getItem('loggedIn')===true)){
+        const test = sessionStorage.getItem('loggedIn')
+        if(sessionStorage.getItem('loggedIn') && test=== "true"){
             setLoggedIn(false)
         }
-    });
+    },[]);
 
     const handleClick  = (e)=>{
         e.preventDefault();
@@ -43,7 +44,7 @@ export default function Navbar() {
                     <li role="list" dir="rtl">
                         <a href="#" aria-haspopup="listbox">Profile</a>
                         <ul role="listbox">
-                            <li><a>post new event</a></li>
+                            <li><Link to="/createvent"><a>post new event</a></Link></li>
                             <li><a>my events</a></li>
                             <li><a>joined events</a></li>
                         </ul>
