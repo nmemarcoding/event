@@ -3,7 +3,10 @@ const user = require("./user.model")
 const Event = mongoose.model(
     "Event",
     new mongoose.Schema({
-        hostId: String,
+        hostId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
         title: String,
         date: String,
         time: String,

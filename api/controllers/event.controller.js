@@ -78,12 +78,20 @@ exports.getEvnts = (req, res) => {
 
 // get event by id add id to url
 exports.getEvent = (req, res) => {
-    let temp = ""
-    Event.find({ _id: req.params.id }).populate("guestsId", "email username")
-        .then(data => { res.send(data) })
+    Event.find({ _id: req.params.id }).populate("guestsId", "email username").populate("hostId", "email username")
+        .then(data => { res.send(data) }).catch(e => { res.send(e) })
 
 
 }
+
+// get event by hostId (add host id to url)
+exports.getEventByHostId = (req, res) => {
+    Event.find({ hostId: { _id: req.params.id } }).populate("guestsId", "email username").populate("hostId", "email username")
+        .then(data => { res.send(data) }).catch(e => { res.send(e) })
+
+
+}
+
 
 // get event by user id (id user id to url)
 
