@@ -6,10 +6,12 @@ const user = require("./routes/user.routes");
 const event = require("./routes/event.routes");
 const app = express();
 
-var corsOptions = {
-    origin: "http://localhost:8081"
-};
-app.use(cors(corsOptions));
+app.use(cors({
+    credentials: true,
+    origin: '*',
+    AccessControlAllowCredentials: true
+}));
+
 // parse requests of content-type - application/json
 app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded

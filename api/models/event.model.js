@@ -6,6 +6,8 @@ const Event = mongoose.model(
         hostId: String,
         title: String,
         date: String,
+        time: String,
+        location: String,
         guestsId: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"

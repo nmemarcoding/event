@@ -7,7 +7,11 @@ exports.create = (req, res) => {
         hostId: req.body.hostId,
         title: req.body.title,
         date: req.body.date,
-        guestsId: req.body.guestsId
+        guestsId: req.body.guestsId,
+        location: req.body.location,
+        time: req.body.time,
+
+
     });
     event.save((err) => {
         if (err) {
