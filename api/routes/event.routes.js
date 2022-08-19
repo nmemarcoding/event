@@ -15,7 +15,8 @@ router.get('/:id', [authJwt.verifyToken], (req, res) => { controller.getEvent(re
 router.get('/hostid/:id', [authJwt.verifyToken], (req, res) => { controller.getEventByHostId(req, res) })
 
 // get event by user id (id user id to url)
-router.get('/guest/:id', [authJwt.verifyToken], (req, res) => { controller.getEvetByGuestId(req, res) })
+router.get('/guestid/:id', [authJwt.verifyToken], (req, res) => { controller.getEventByGuestId(req, res) })
+
 
 // add guest  add event (add event id to url and body "guestsId": ["guestId"] )
 router.put('/:id', [authJwt.verifyToken], (req, res) => { controller.addGuest(req, res) })
