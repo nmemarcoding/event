@@ -19,10 +19,11 @@ export default function LoginPage() {
         e.preventDefault();
        
 
-            Axios.post("/api/auth/signin", credentials)
+            Axios.post("/auth/signin", credentials)
             .then((res) =>{
                 console.log(res.data)
                 sessionStorage.setItem('loggedIn', true);
+                sessionStorage.setItem('id', res.data.id);
                 navigate('/');
                 
             } ).catch((e)=>{
