@@ -4,6 +4,7 @@ import EventCard from '../../components/navbar/EventCard/EventCard'
 import Axios from '../../hook/axios'
 
 export default function MyEventPage() {
+    
     const [input,setData] = useState([]);
     const [userId,setUser] = useState(sessionStorage.getItem('id'))
     

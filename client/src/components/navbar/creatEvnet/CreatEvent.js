@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import Axios from '../../../hook/axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function CreatEvent() {
+    const navigate = useNavigate()
     const [credentials,setCredentials] = useState({
         hostId:sessionStorage.getItem("id"),
         title: undefined, 
@@ -25,7 +27,7 @@ export default function CreatEvent() {
 
             Axios.post("/event/creat", credentials)
             .then((res) =>{
-                window.alert(res.data)
+                navigate("/myevent")
                 
                 
                 
