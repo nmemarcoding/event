@@ -1,0 +1,8 @@
+.eventCard {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    min-width: 250px;
+    align-items: center;
+    justify-content: center;
+}

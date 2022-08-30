@@ -45,7 +45,7 @@ export default function Navbar() {
                         <a href="#" aria-haspopup="listbox">Profile</a>
                         <ul role="listbox">
                             <li><Link to="/createvent"><a>post new event</a></Link></li>
-                            <li><a>my events</a></li>
+                            <li><a><Link to="/myevent">My Event</Link></a></li>
                             <li><a>joined events</a></li>
                         </ul>
                     </li>
