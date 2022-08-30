@@ -103,17 +103,6 @@ exports.getEventByGuestId = (req, res) => {
 }
 
 
-
-// get event by user id (id user id to url)
-
-exports.getEvetByGuestId = (req, res) => {
-    Event.find({ guestsId: [req.params.id] })
-        .then(user => { res.send(user) })
-}
-
-
-
-
 // delet event by event id "add id to url"
 
 exports.deletEvent = (req, res) => {
